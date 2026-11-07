@@ -85,6 +85,13 @@ describe('bitglyph CLI', () => {
     expect(rootAttr(stdout, 'viewBox')).toBe('0 0 14 16');
   });
 
+  it('produces the same SVG as the equivalent library call', async () => {
+    const { renderSVG } = await import('../src/svg.js');
+    const { loadFont } = await import('../src/node.js');
+    const { stdout } = await cli(['same', '-c', '#a8321f', '-s', '3', '--texture', 'dots']);
+    expect(stdout).toBe(renderSVG(loadFont('spleen-8x16'), 'same', { color: '#a8321f', scale: 3, texture: 'dots' }));
+  });
+
   it('per-glyph mode emits one path per glyph', async () => {
     const { stdout } = await cli(['abc', '--per-glyph']);
     expect(stdout.match(/<path /g)).toHaveLength(3);

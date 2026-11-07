@@ -103,6 +103,9 @@ describe('renderSVG', () => {
     const other = /<mask id="([^"]+)-mask"/.exec(renderSVG(spleen, 'diff', { texture: 'dots' }))![1];
     expect(id).toMatch(/^b[0-9a-z]+$/);
     expect(other).not.toBe(id);
+    // Key order does not matter.
+    const opts = { scale: 2, padding: 1, texture: 'dots' as const };
+    expect(renderSVG(spleen, 'k', opts)).toBe(renderSVG(spleen, 'k', { texture: 'dots', padding: 1, scale: 2 }));
   });
 
   it('validates options', () => {

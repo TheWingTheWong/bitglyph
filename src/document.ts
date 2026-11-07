@@ -88,7 +88,12 @@ export function createIds(prefix: string): Ids {
 /** Deterministic default prefix: `b` + FNV-1a hash of the inputs, base 36. */
 export function defaultPrefix(...inputs: unknown[]): string {
   let h = 0x811c9dc5;
-  const s = JSON.stringify(inputs);
+  // Sorted keys: the same options in a different order give the same prefix.
+  const s = JSON.stringify(inputs, (_key, value: unknown) =>
+    value && typeof value === 'object' && !Array.isArray(value)
+      ? Object.fromEntries(Object.entries(value).sort(([a], [b]) => (a < b ? -1 : 1)))
+      : value,
+  );
   for (let i = 0; i < s.length; i++) {
     h ^= s.charCodeAt(i);
     h = Math.imul(h, 0x01000193);

@@ -159,7 +159,7 @@ async function main(argv: string[], io: CliIO): Promise<number> {
     align: oneOf(v.align, 'align', ['left', 'center', 'right'] as const satisfies readonly Align[]),
     padding: num(v.padding, 'padding'),
     fallback: v.fallback,
-    color: v.color ? v.color.split(',').map((c) => c.trim()).filter(Boolean) : undefined,
+    color: colors(v.color),
     gradient: oneOf(v.gradient, 'gradient', ['vertical', 'horizontal'] as const),
     background: v.background,
     radius: num(v.radius, 'radius'),
@@ -199,6 +199,14 @@ async function main(argv: string[], io: CliIO): Promise<number> {
     io.stdout(svg);
   }
   return 0;
+}
+
+/** "a" -> "a", "a, b" -> ["a", "b"]. */
+function colors(value: string | undefined): string | string[] | undefined {
+  if (value === undefined) return undefined;
+  const list = value.split(',').map((c) => c.trim()).filter(Boolean);
+  if (list.length === 0) throw new UsageError('--color is empty');
+  return list.length === 1 ? list[0] : list;
 }
 
 function num(value: string | undefined, name: string): number | undefined {
