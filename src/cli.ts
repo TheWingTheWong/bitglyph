@@ -31,7 +31,7 @@ Output
       --list-fonts        print bundled font names and exit
 
 Layout
-      --tracking <px>     extra space between characters, may be negative
+      --tracking <px>     extra space between characters (--tracking=-1 to tighten)
       --line-height <px>  distance between baselines
       --align <a>         left | center | right
   -p, --padding <px>      space around the text, in font pixels
