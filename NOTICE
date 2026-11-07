@@ -1,0 +1,18 @@
+bitglyph
+Copyright (c) 2026 Ansorjon Juraev
+Licensed under the MIT License (see LICENSE).
+
+-------------------------------------------------------------------------------
+
+This package bundles the Spleen bitmap fonts:
+
+  fonts/spleen-6x12.bdf
+  fonts/spleen-8x16.bdf
+  fonts/spleen-12x24.bdf
+
+Spleen is Copyright (c) 2018-2026, Frederic Cambus
+https://github.com/fcambus/spleen
+
+Spleen is distributed under the BSD 2-Clause License. The full license text is
+included in fonts/LICENSE and must accompany any redistribution of the font
+files. The font files are included unmodified.

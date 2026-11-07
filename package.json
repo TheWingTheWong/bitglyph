@@ -1,0 +1,59 @@
+{
+  "name": "bitglyph",
+  "version": "0.1.0",
+  "description": "Render text in bitmap (BDF) fonts as crisp SVG pixel geometry. No web fonts, identical everywhere.",
+  "keywords": [
+    "bdf",
+    "bitmap-font",
+    "pixel-font",
+    "svg",
+    "banner",
+    "readme",
+    "cli",
+    "spleen",
+    "dot-matrix",
+    "demoscene"
+  ],
+  "license": "MIT",
+  "author": "Ansorjon Juraev",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "default": "./dist/node.js"
+    },
+    "./fonts/*": "./fonts/*",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "bitglyph": "./dist/bin.js"
+  },
+  "files": [
+    "dist",
+    "fonts",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "examples": "npm run build && node scripts/build-examples.mjs",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}
