@@ -10,3 +10,6 @@ export type { Run, Rect } from './raster.js';
 export { renderSVG } from './svg.js';
 export type { RenderOptions, CaretStyle } from './svg.js';
 export type { StyleOptions, Texture } from './document.js';
+
+export { render, scroller, typewriter, wave, EFFECTS } from './effects.js';
+export type { Effect, ScrollerOptions, TypewriterOptions, WaveOptions, AnyEffectOptions } from './effects.js';
