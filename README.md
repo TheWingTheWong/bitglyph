@@ -1,4 +1,6 @@
 <p align="center">
+
+[![ci](https://github.com/TheWingTheWong/bitglyph/actions/workflows/ci.yml/badge.svg)](https://github.com/TheWingTheWong/bitglyph/actions/workflows/ci.yml)
   <img src="examples/banner.svg" width="840" alt="The word bitglyph printed in dot-matrix pixels on green-bar listing paper">
 </p>
 
