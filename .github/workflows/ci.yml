@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: CLI smoke test
+        run: |
+          node dist/bin.js "hello world" --font spleen-8x16 --scale 6 --effect scroller -o banner.svg
+          grep -q '<use href=' banner.svg
+          echo "piped" | node dist/bin.js --texture dots > piped.svg
+          grep -q '<title>piped</title>' piped.svg
+      - name: Examples are up to date
+        run: |
+          node scripts/build-examples.mjs
+          git diff --exit-code -- examples
+      - name: Package contents
+        run: npm pack --dry-run
